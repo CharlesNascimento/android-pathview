@@ -9,30 +9,31 @@ Animate the "procentage" property to make the animation.
 ### There are two types of paths :
 
 #### 1. From Svg  
-
-    <com.eftimoff.androipathview.PathView
-    	xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/pathView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:pathColor="@android:color/white"
-        app:svg="@raw/settings"
-        app:pathWidth="5"/>
+```xml
+<com.eftimoff.androipathview.PathView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pathView"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    app:pathColor="@android:color/white"
+    app:svg="@raw/settings"
+    app:pathWidth="5"/>
+```
         
 Result 
 
 ![svg](https://github.com/geftimov/android-pathview/blob/master/art/settings.gif) 
 
 #### 2. From Path
-
-    <com.eftimoff.androipathview.PathView
-    	xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/pathView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:pathColor="@android:color/white"
-        app:pathWidth="3"/>
-        
+```xml
+<com.eftimoff.androipathview.PathView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pathView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:pathColor="@android:color/white"
+    app:pathWidth="3"/>
+```
 
 In Code    
     
@@ -54,8 +55,8 @@ Result
 
 ![svg](https://github.com/geftimov/android-pathview/blob/master/art/path.gif)
 
-#### Use the animator
-
+#### Use the animator for parallel animation
+```java
     pathView.getPathAnimator()
         .delay(100)
         .duration(500)
@@ -63,16 +64,27 @@ Result
         .listenerEnd(new AnimationListenerEnd())
         .interpolator(new AccelerateDecelerateInterpolator())
         .start();
-        
-#### If you want to use the svg colors.
+```
 
+#### Use the animator for sequential animation
+```java
+    pathView.getSequentialPathAnimator()
+        .delay(100)
+        .duration(500)
+        .listenerStart(new AnimationListenerStart())
+        .listenerEnd(new AnimationListenerEnd())
+        .interpolator(new AccelerateDecelerateInterpolator())
+        .start();
+``` 
+#### If you want to use the svg colors.
+```java
     pathView.useNaturalColors();
-    
+```
 #### If you want to draw the real SVG after the path animation. 
 It is in still in development.
-    
+```java
     pathView.setFillAfter(true);
-    
+```
 ![path](https://github.com/geftimov/android-pathview/blob/master/art/fill-after-resize-new.gif)
     
 #### TODO
@@ -95,14 +107,25 @@ I want to update this library and make it better. So any help will be appreciate
 Make and pull - request and we can discuss it.
 
 ##### Download
+```groovy
+dependencies {
+	compile 'com.eftimoff:android-pathview:1.0.8@aar'
+}
+```
+##### Changelog
 
-	dependencies {
-		compile 'com.eftimoff:android-pathview:1.0.6@aar'
-	}
+<b>1.0.8</b>
+
+	[Fix] Removed not properly used android:allowBackup.
+
+<b>1.0.7</b>
+
+	[Feature] Sequential path animation.
+	[Fix] Use dimensions instead of float for pathWidth.
 
 ##### Licence
 
-    Copyright 2015 Georgi Eftimov
+    Copyright 2016 Georgi Eftimov
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -115,7 +138,3 @@ Make and pull - request and we can discuss it.
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-
-
-
